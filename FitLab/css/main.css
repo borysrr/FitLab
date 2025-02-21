@@ -1,0 +1,22 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-color: ghostwhite;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: Papyrus, 'kristen itc';
+}
+
+.navbar-nav > li > a {
+    color: white !important;
+    font-weight: bold;
+    transition: color 0.5s ease-in-out;
+}
+
+.navbar-nav > li > a:hover {
+    color: midnightblue !important;
+    text-decoration: underline;
+}
