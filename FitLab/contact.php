@@ -14,9 +14,6 @@ require 'lib/functions.php';
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" required style="width: 300px; padding: 5px;"><br><br>
 
-        <label for="dob">Date of Birth:</label><br>
-        <input type="date" id="dob" name="dob" required style="width: 300px; padding: 5px;"><br><br>
-
         <label for="description">Describe Your Issue:</label><br>
         <textarea id="description" name="description" rows="5" required style="width: 300px; padding: 5px;"></textarea><br><br>
 
