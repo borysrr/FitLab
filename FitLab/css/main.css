@@ -21,4 +21,25 @@ body {
     text-decoration: underline;
 }
 
+label {
+    display: block;
+    margin: 5px 0;
+}
 
+button {
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.clothing-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}

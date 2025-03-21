@@ -1,7 +1,7 @@
 <?php
 require 'lib/functions.php';
 ?>
-<?php require 'layout/header.php'; ?>
+<?php require 'templates/header.php'; ?>
 
 <div style='text-align: center; margin-top: 50px;'>
     <h1>Contact Form</h1>
@@ -20,5 +20,3 @@ require 'lib/functions.php';
         <button type="submit" style="background-color: lightgreen; color: white; padding: 10px 20px; border: none; cursor: pointer;">Submit</button>
     </form>
 </div>
-
-<?php require 'layout/footer.php'; ?>

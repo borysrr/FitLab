@@ -1,3 +1,16 @@
+<?php
+// Check if session is already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Start the session if not already started
+}
+
+$cart_count = 0;
+if (!empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        $cart_count += $item['quantity']; // Count total items
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,22 +19,21 @@
     <title>FitLab.com</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/products%20images/favicon.png"> <!-- Correct Placement -->
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: dodgerblue;
-border-color: darkblue; border-width: 4px; border-style: solid;">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: dodgerblue; border-color: darkblue; border-width: 4px; border-style: solid;">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            </button>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
             <a class="navbar-brand" href="/index.php" style="color: Black">FitLab</a>
         </div>
 
         <ul class="nav navbar-nav" style="display: flex; justify-content: center; width: 35%;">
             <li><a href="/index.php">Home</a></li>
             <li><a href="/products.php">Supplements</a></li>
-            <li><a href="/clothing.php">Clothing</a></li>
+            <li><a href="/clothing.php">Apparel</a></li>
             <li><a href="/contact.php">Contact</a></li>
         </ul>
 
@@ -36,7 +48,7 @@ border-color: darkblue; border-width: 4px; border-style: solid;">
                 </form>
             </li>
             <!-- Shopping Cart -->
-            <li><a href="/cart.php" style="color: white;"><span class="glyphicon glyphicon-shopping-cart"></span> Cart (<span id="cart-count">0</span>)</a></li>
+            <li><a href="/cart.php" style="color: white;"><span class="glyphicon glyphicon-shopping-cart"></span> Cart (<span id="cart-count"><?php echo $cart_count; ?></span>)</a></li>
             <!-- User Account Dropdown -->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><span class="glyphicon glyphicon-user"></span> Account <b class="caret"></b></a>
@@ -50,9 +62,8 @@ border-color: darkblue; border-width: 4px; border-style: solid;">
 </nav>
 
 <script>
-    // Example script to dynamically update cart count (You will need backend logic for real cart functionality)
     document.addEventListener("DOMContentLoaded", function() {
-        let cartCount = localStorage.getItem("cartCount") || 0;
+        let cartCount = <?php echo $cart_count; ?>;
         document.getElementById("cart-count").innerText = cartCount;
     });
 </script>
