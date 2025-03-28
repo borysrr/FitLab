@@ -27,7 +27,7 @@ if (!empty($_SESSION['cart'])) {
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-            <a class="navbar-brand" href="/index.php" style="color: Black">FitLab</a>
+            <a class="navbar-brand" href="/FitLabtrack.php" style="color: Black">FitLab</a>
         </div>
 
         <ul class="nav navbar-nav" style="display: flex; justify-content: center; width: 35%;">

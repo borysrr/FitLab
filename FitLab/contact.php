@@ -7,6 +7,11 @@ require 'lib/functions.php';
     <h1>Contact Form</h1>
     <p>If you're facing any issues, please fill out the form below, and we'll get back to you.</p>
 
+    <!-- Success Message -->
+    <?php if (isset($_GET["success"])): ?>
+        <p style="color: green; text-align: center;">Form submitted successfully!</p>
+    <?php endif; ?>
+
     <form action="submit_form.php" method="post" style="display: inline-block; text-align: left; margin-top: 20px;">
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required style="width: 300px; padding: 5px;"><br><br>

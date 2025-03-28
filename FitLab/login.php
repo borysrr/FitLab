@@ -1,5 +1,10 @@
 <?php
 session_start();
+require_once 'src/db_connect.php'; // Ensure correct database connection
+
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Define variables to hold form data and errors
 $email = $password = "";
@@ -7,26 +12,41 @@ $error = "";
 
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize inputs
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Invalid email format!";
-    }
-    // Dummy user data (Replace with actual database validation)
-    else {
-        $valid_email = "user@example.com";
-        $valid_password = "password123";
-
-        if ($email === $valid_email && $password === $valid_password) {
-            $_SESSION['user'] = $email;
-            header("Location: dashboard.php"); // Redirect to dashboard after successful login
-            exit();
+    try {
+        // Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Invalid email format!";
         } else {
-            $error = "Invalid email or password!";
+            // Check if the email exists in the database
+            $stmt = $connection->prepare("SELECT * FROM Users WHERE email = :email");
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                // Debugging: Check stored password and hash
+                echo "Stored hashed password: " . $user['password'] . "<br>";
+
+                // Verify password
+                if (password_verify($password, $user['password'])) {
+                    // Set session variables for the logged-in user
+                    $_SESSION['user'] = $email;
+                    $_SESSION['user_id'] = $user['user_ID']; // Store user ID from database
+
+                    // Redirect to dashboard after successful login
+                    header("Location: dashboard.php");
+                    exit();
+                } else {
+                    $error = "Invalid email or password! (Password does not match)";
+                }
+            } else {
+                $error = "Invalid email or password! (Email not found)";
+            }
         }
+    } catch (PDOException $e) {
+        $error = "Database error: " . $e->getMessage();
     }
 }
 ?>
@@ -45,14 +65,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container" style="max-width: 400px; margin-top: 100px;">
     <h2 class="text-center">Login to <span style="font-family: Papyrus, Kristen ITC, sans-serif;">FitLab</span></h2>
 
-    <!-- Display error message if login fails -->
-    <?php if (isset($error)) { echo "<div class='alert alert-danger text-center'>$error</div>"; } ?>
+    <!-- Display error message if any -->
+    <?php if (!empty($error)): ?>
+        <div class="alert alert-danger text-center"><?php echo $error; ?></div>
+    <?php endif; ?>
 
-    <!-- Login Form -->
     <form action="" method="POST">
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" required>
+            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>

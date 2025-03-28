@@ -33,6 +33,14 @@ if (!empty($_SESSION['cart'])) {
     echo "<a href='clear_cart.php'><button style='background: red; color: white; padding: 10px 20px; border: none; border-radius: 5px;'>Clear Cart</button></a>";
     echo "</div>";
 
+    // Back to Products Button
+    echo "<div style='text-align: center; margin-top: 20px;'>";
+    echo "<a href='products.php'><button style='background: #28a745; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer;'>Back to Products</button></a>";
+    echo "</div>";
+
+    // Spacing before Proceed to Checkout
+    echo "<div style='margin-top: 50px;'></div>";
+
     // Checkout Button (without the box)
     echo "<div style='text-align: center; margin-top: 20px;'>";
     echo "<form action='checkout.php' method='POST' style='display: inline;'>";
@@ -44,4 +52,6 @@ if (!empty($_SESSION['cart'])) {
     echo "<p style='text-align: center; font-size: 18px;'>Your cart is empty.</p>";
 }
 
+// Footer Section
+require 'templates/footer.php';
 ?>
