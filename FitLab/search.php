@@ -3,24 +3,27 @@ require 'lib/functions.php';
 require 'templates/header.php';
 ?>
 
-<div style="text-align: center; margin-top: 50px;">
+<div class="container" style="text-align: center; margin-top: 50px;">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-    <h1 style="font-family: Poppins, sans-serif; color: dodgerblue; text-shadow: 3px 3px 6px rgba(0,0,0,0.3); font-size: 48px; letter-spacing: 2px;">Search Items</h1>
+    <h1 style="font-family: Poppins, sans-serif; color: dodgerblue; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); font-size: 48px; letter-spacing: 2px;">
+        Search Items
+    </h1>
 
-    <!-- Search Form -->
     <form method="GET" action="search.php" style="margin-top: 20px;">
-        <input type="text" name="query" placeholder="Search by product name" style="padding: 10px; width: 300px;">
-        <button type="submit" style="background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Search</button>
+        <input type="text" name="query" placeholder="Search by product name" class="form-control" style="width: 300px; display: inline-block;">
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Search</button>
     </form>
 
-    <div style="margin-top: 30px;">
-
+    <div class="product-results" style="margin-top: 30px;">
         <?php
-        // Product List
         $products = [
+            // Supplements
             ["products images/Choco Mint whey.png", "Choco Mint Whey Protein Powder", "20.99"],
             ["products images/ChocolateVegan.png", "Chocolate Flavour Vegan Protein Powder", "18.99"],
             ["products images/Vanilla Vegan.png", "Vanilla Vegan Protein Powder", "18.99"],
+            ["products images/proteinworks.jpg", "ProteinWorks Vegan Protein Chocolate Silk", "17.50"],
+            ["products images/vegaprotein.jpg", "VEGA Vegan Protein & Green Chocolate", "19.50"],
+            ["products images/strawmass.jpg", "Strawberry Mass Gainer", "23.99"],
             ["products images/Cinnamon Biscoff Whey.png", "Cinnamon Biscoff Whey Protein Powder", "20.99"],
             ["products images/Strawberry Vegan.png", "Strawberry Vegan Protein Powder", "18.99"],
             ["products images/COOKIES AND Cream Whey.png", "Cookies and Cream Whey Protein Powder", "20.99"],
@@ -30,13 +33,14 @@ require 'templates/header.php';
             ["products images/apple.jpg", "Creatine Whey Apple", "19.99"],
             ["products images/clearwhey watermelon.jpg", "Clear Whey Watermelon", "19.99"],
             ["products images/clearwhey plum.jpg", "Clear Whey Plum", "19.99"],
-            ["products images/strawmass.jpg", "Strawberry Mass Gainer", "23.99"],
+            ["products images/peaprotein.png", "Vegan Pea Protein Vanilla", "17.50"],
             ["products images/milkprotein.jpg", "Milk Protein Powder", "16.99"],
             ["products images/creatine.jpg", "Creatine Monohydrate", "16.99"],
             ["products images/creatinepills.jpg", "Creatine Pills", "19.99"],
             ["products images/pre.jpg", "Pre-Workout", "13.99"],
             ["products images/preworkout.jpg", "Gold Pre-Workout", "13.99"],
 
+            // Clothing - Mens
             ["clothing images/blackhoodiemens.jpg", "Black Hoodie - Mens", "34.99"],
             ["clothing images/blackjoggersmens.jpg", "Black Joggers - Mens", "14.99"],
             ["clothing images/blacktshirtmens.png", "Black T-Shirt - Mens", "5.99"],
@@ -50,6 +54,7 @@ require 'templates/header.php';
             ["clothing images/navytshirtmens.jpg", "Navy T-Shirt - Mens", "3.99"],
             ["clothing images/navyshortsmens.png", "Navy Shorts - Mens", "8.99"],
 
+            // Clothing - Womans
             ["clothing images/blackhoodiewomans.jpg", "Black Hoodie - Womans", "30.99"],
             ["clothing images/blackleggingswomans.jpg", "Black Leggings - Womans", "20.99"],
             ["clothing images/blacksportswomans.jpg", "Black Sports Bra - Womans", "7.99"],
@@ -67,21 +72,23 @@ require 'templates/header.php';
         // Get search query from URL
         $query = isset($_GET['query']) ? strtolower(trim($_GET['query'])) : '';
 
-        // Filter products if search query is entered
+        // Filter products
         $filteredProducts = $query
-            ? array_filter($products, fn($product) => strpos(strtolower($product[1]), $query) !== false)
+            ? array_filter($products, function($product) use ($query) {
+                return strpos(strtolower($product[1]), $query) !== false;
+            })
             : $products;
 
         // Display Products
         if (count($filteredProducts) > 0) {
-            echo "<div style='display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; margin-top: 50px; padding: 20px; max-width: 1200px; margin-left: auto; margin-right: auto;'>";
+            echo "<div class='product-list' style='display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;'>";
 
             foreach ($filteredProducts as $product) {
-                echo "<div style='flex: 1 1 300px; text-align: center; background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);'>";
-                echo "<img src='{$product[0]}' alt='{$product[1]}' style='width: 100%; max-width: 250px; height: auto; border-radius: 10px;'>";
-                echo "<h3 style='margin-top: 15px; color: #333;'>{$product[1]}</h3>";
-                echo "<p style='font-weight: bold; color: #007bff;'>\${$product[2]}</p>";
-                echo "<button style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;'>Add to Cart</button>";
+                echo "<div class='product-card' style='flex: 1 1 300px; text-align: center; background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);'>";
+                echo "<img src='{$product[0]}' alt='{$product[1]}' class='product-image' style='width: 100%; max-width: 250px; height: auto; border-radius: 10px;'>";
+                echo "<h3 class='product-name' style='margin-top: 15px; color: #333;'>{$product[1]}</h3>";
+                echo "<p class='product-price' style='font-weight: bold; color: #007bff;'>\${$product[2]}</p>";
+                echo "<button class='add-to-cart-btn' style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;'>Add to Cart</button>";
                 echo "</div>";
             }
 
@@ -90,7 +97,6 @@ require 'templates/header.php';
             echo "<p style='color: red;'>No products found for your search.</p>";
         }
         ?>
-
     </div>
 </div>
 

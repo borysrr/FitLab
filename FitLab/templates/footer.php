@@ -4,7 +4,6 @@
     <p><a href='contact.php' style='color: white; text-decoration: none; margin: 0 10px;'>Contact Us</a></p>
 </footer>
 
-<!-- Scripts -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>

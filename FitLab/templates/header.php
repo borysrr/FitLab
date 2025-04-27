@@ -1,15 +1,17 @@
 <?php
-// Check if session is already started
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); // Start the session if not already started
+    session_start();
 }
 
 $cart_count = 0;
 if (!empty($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $item) {
-        $cart_count += $item['quantity']; // Count total items
+        $cart_count += $item['quantity'];
     }
 }
+
+$is_logged_in = isset($_SESSION['user']);
+$user_email = $is_logged_in ? $_SESSION['user'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,18 +21,18 @@ if (!empty($_SESSION['cart'])) {
     <title>FitLab.com</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/products%20images/favicon.png"> <!-- Correct Placement -->
+    <link rel="icon" type="image/png" href="/products%20images/favicon.png">
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: dodgerblue; border-color: darkblue; border-width: 4px; border-style: solid;">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: dodgerblue; border-color: darkblue; border-width: 3px; border-style: solid;">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-            <a class="navbar-brand" href="/FitLabtrack.php" style="color: Black">FitLab</a>
+            <a class="navbar-brand" href="/FitLabtrack.php" style="color: black;">FitLab</a>
         </div>
 
-        <ul class="nav navbar-nav" style="display: flex; justify-content: center; width: 35%;">
+        <ul class="nav navbar-nav" style="display: flex; justify-content: center; width: 32%;">
             <li><a href="/index.php">Home</a></li>
             <li><a href="/products.php">Supplements</a></li>
             <li><a href="/clothing.php">Apparel</a></li>
@@ -38,7 +40,6 @@ if (!empty($_SESSION['cart'])) {
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <!-- Search Form -->
             <li>
                 <form class="navbar-form" action="search.php" method="GET">
                     <div class="form-group">
@@ -47,16 +48,30 @@ if (!empty($_SESSION['cart'])) {
                     <button type="submit" class="btn btn-success">Search</button>
                 </form>
             </li>
-            <!-- Shopping Cart -->
-            <li><a href="/cart.php" style="color: white;"><span class="glyphicon glyphicon-shopping-cart"></span> Cart (<span id="cart-count"><?php echo $cart_count; ?></span>)</a></li>
-            <!-- User Account Dropdown -->
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><span class="glyphicon glyphicon-user"></span> Account <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="/login.php">Login</a></li>
-                    <li><a href="/signup.php">Sign Up</a></li>
-                </ul>
-            </li>
+            <li><a href="/cart.php" style="color: white;">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart (<span id="cart-count"><?php echo $cart_count; ?></span>)
+                </a></li>
+
+            <?php if ($is_logged_in): ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">
+                        <span class="glyphicon glyphicon-user"></span> <?php echo htmlspecialchars($user_email); ?> <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/logout.php">Logout</a></li>
+                    </ul>
+                </li>
+            <?php else: ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">
+                        <span class="glyphicon glyphicon-user"></span> Account <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/login.php">Login</a></li>
+                        <li><a href="/signup.php">Sign Up</a></li>
+                    </ul>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

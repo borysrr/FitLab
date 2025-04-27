@@ -1,6 +1,18 @@
 <?php
+session_start();
+require "common.php";
+
+require_once 'session_handler.php';
+$session = new SessionHandlerCustom();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php?redirect=createshipping.php");
+    exit();
+}
+
+$order_ID_from_get = $_GET['order_ID'] ?? '';
+
 if (isset($_POST['submit'])) {
-    require "common.php";
     try {
         require_once 'src/db_connect.php';
 
@@ -23,6 +35,8 @@ if (isset($_POST['submit'])) {
         $statement = $connection->prepare($sql);
         $statement->execute($new_shipping);
 
+        $success = true;
+
     } catch (PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
@@ -30,7 +44,7 @@ if (isset($_POST['submit'])) {
 
 require "templates/header.php";
 
-if (isset($_POST['submit']) && $statement) {
+if (isset($success) && $success) {
     echo "Shipping information successfully added!";
 }
 ?>
@@ -39,21 +53,16 @@ if (isset($_POST['submit']) && $statement) {
 <form method="post">
     <label for="name">Full Name</label>
     <input type="text" name="name" id="name" required>
-
     <label for="phone_number">Phone Number</label>
     <input type="text" name="phone_number" id="phone_number" required>
-
     <label for="address">Address</label>
     <input type="text" name="address" id="address" required>
-
     <label for="payment_type">Payment Type</label>
     <input type="text" name="payment_type" id="payment_type" required>
-
     <label for="confirmation">Confirmation</label>
     <input type="text" name="confirmation" id="confirmation" required>
-
     <label for="Orders_order_ID">Order ID</label>
-    <input type="text" name="Orders_order_ID" id="Orders_order_ID" required>
+    <input type="text" name="Orders_order_ID" id="Orders_order_ID" required value="<?php echo htmlspecialchars($order_ID_from_get); ?>">
 
     <input type="submit" name="submit" value="Submit">
 </form>

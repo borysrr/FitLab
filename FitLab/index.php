@@ -2,25 +2,20 @@
 require 'lib/functions.php';
 require 'templates/header.php';
 
-echo "<link href='https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap' rel='stylesheet'>";
-
-// Hero Section with Call-to-Action
 echo "<div style='text-align: center; padding: 50px 20px; background: linear-gradient(to right, #007bff, #00c6ff); color: white;'>";
 echo "<h1 style='font-family: Poppins, sans-serif; font-size: 48px; letter-spacing: 2px;'>Welcome To Our Store</h1>";
 echo "<p style='font-size: 20px; max-width: 600px; margin: 20px auto;'>Supplements & Apparel for Your Fitness Journey</p>";
 echo "<a href='products.php'><button style='background: white; color: #007bff; padding: 15px 25px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer;'>Shop Now</button></a>";
 echo "</div>";
 
-
-// Logo Section
+// Logo
 echo "<div style='text-align: center; margin-top: 30px;'>";
 echo "<img src='/products%20images/favicon.png' alt='logo Image' style='max-width: 15%; height: auto;'>";
 echo "<p style='font-size: 20px; max-width: 600px; margin: 20px auto;'>Popular Supplements & Apparel</p>";
 echo "</div>";
 
-// Product Section Layout
+// Product Section
 echo "<div style='display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; margin-top: 50px; padding: 20px; max-width: 1200px; margin-left: auto; margin-right: auto;'>";
-
 $products = [
     ["products images/Choco Mint whey.png", "Choco Mint Whey Protein Powder", "20.99"],
     ["products images/ChocolateVegan.png", "Chocolate Flavour Vegan Protein Powder", "18.99"],
@@ -39,7 +34,6 @@ $products = [
     ["clothing images/blackhoodiemens.jpg", "Black Hoodie - Mens", "34.99"],
     ["clothing images/whitetshirtmens.jpg", "White T-Shirt - Mens", "3.99"],
     ["clothing images/navyshortsmens.png", "Navy Shorts - Mens", "8.99"],
-
     ["clothing images/blackleggingswomans.jpg", "Black Leggings - Womans", "20.99"],
     ["clothing images/pinksports.jpg", "Pink Sports Bra - Womans", "6.99"],
     ["clothing images/whitejoggers.jpg", "White Joggers - Womans", "20.99"]
@@ -55,10 +49,7 @@ foreach ($products as $product) {
     echo "</a>";
     echo "</div>";
 }
-
 echo "</div>";
 
-// Footer Section
 require 'templates/footer.php';
-
 ?>

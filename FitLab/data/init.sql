@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Orders (
     order_ID VARCHAR(10) PRIMARY KEY,
     total_cost VARCHAR(45) NOT NULL,
     order_date VARCHAR(45) NOT NULL,
-    Users_user_ID INT,  -- Changed from Users_user_ID to Shipping_ID
+    Users_user_ID INT,
     FOREIGN KEY (Shipping_ID) REFERENCES Shipping_and_Payment(Shipping_ID) ON DELETE CASCADE
     );
 
@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS Shipping_and_Payment (
     FOREIGN KEY (Orders_order_ID) REFERENCES Orders(order_ID) ON DELETE CASCADE
     );
 
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE Users (
     user_ID INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL
-    );
+);
