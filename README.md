@@ -12,5 +12,8 @@ Contribution Statement:
 all work was completed by us and this is how we splited up the work for the project.
 
 Tom: Worked with the database and the functionality to be incorporated into the website, the SQL linking, and the phpMyAdmin connection (CRUD).
+
 Borys: Layout and website design, how the majority of the website looks. structure design. products, clothing, checkout.
+
 Rhema: Worked on lots of the SQL and how it will work with the website, Diagram, and the Use Case Spec/ Diagram. Log in and sign up validation, etc.
+
