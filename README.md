@@ -11,7 +11,7 @@ https://www.php.net/manual/en/index.php — Helped out with the website and how 
 
 Contribution Statement:
 
-all work was completed by us and this is how we splited up the work for the project.
+all work was completed by us and this is how we split up the work for the project.
 
 Tom: Worked with the database and the functionality to be incorporated into the website, the SQL linking, and the phpMyAdmin connection (CRUD).
 
