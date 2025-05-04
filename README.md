@@ -7,6 +7,8 @@ https://www.w3schools.com/php/php_mysql_intro.asp – Basic integrations and set
 
 https://www.php.net/manual/en/index.php — Helped out with the website and how users interact with certain parts in the code that have to do with the database. Connections from files to the database and files connecting to other files are implemented in them for the website to function without problems.
 
+****only used to assist with more clear and basic understanding*******
+
 Contribution Statement:
 
 all work was completed by us and this is how we splited up the work for the project.
