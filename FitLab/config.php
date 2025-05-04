@@ -1,4 +1,5 @@
 <?php
+// Link the database with the website
 $host = "localhost";
 $username = "root";
 $password = "";

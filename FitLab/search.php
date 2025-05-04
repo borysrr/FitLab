@@ -4,7 +4,6 @@ require 'templates/header.php';
 ?>
 
 <div class="container" style="text-align: center; margin-top: 50px;">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <h1 style="font-family: Poppins, sans-serif; color: dodgerblue; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); font-size: 48px; letter-spacing: 2px;">
         Search Items
     </h1>
@@ -69,26 +68,20 @@ require 'templates/header.php';
             ["clothing images/pinkjoggers.jpg", "Pink Joggers - Womans", "20.99"]
         ];
 
-        // Get search query from URL
         $query = isset($_GET['query']) ? strtolower(trim($_GET['query'])) : '';
 
-        // Filter products
         $filteredProducts = $query
-            ? array_filter($products, function($product) use ($query) {
-                return strpos(strtolower($product[1]), $query) !== false;
-            })
-            : $products;
+            ? array_filter($products, fn($p) => strpos(strtolower($p[1]), $query) !== false) : $products;
 
-        // Display Products
         if (count($filteredProducts) > 0) {
             echo "<div class='product-list' style='display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;'>";
 
             foreach ($filteredProducts as $product) {
                 echo "<div class='product-card' style='flex: 1 1 300px; text-align: center; background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);'>";
-                echo "<img src='{$product[0]}' alt='{$product[1]}' class='product-image' style='width: 100%; max-width: 250px; height: auto; border-radius: 10px;'>";
-                echo "<h3 class='product-name' style='margin-top: 15px; color: #333;'>{$product[1]}</h3>";
-                echo "<p class='product-price' style='font-weight: bold; color: #007bff;'>\${$product[2]}</p>";
-                echo "<button class='add-to-cart-btn' style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;'>Add to Cart</button>";
+                echo "<img src='{$product[0]}' alt='{$product[1]}' style='width: 100%; max-width: 250px; border-radius: 10px;'>";
+                echo "<h3>{$product[1]}</h3>";
+                echo "<p style='color: #007bff; font-weight: bold;'>£{$product[2]}</p>";
+                echo "<button class='btn-add-to-cart' style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px;'>Add to Cart</button>";
                 echo "</div>";
             }
 

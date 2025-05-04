@@ -1,21 +1,25 @@
 <?php
+// Include external PHP files for functions and header
 require 'lib/functions.php';
 require 'templates/header.php';
 
-echo "<div style='text-align: center; padding: 50px 20px; background: linear-gradient(to right, #007bff, #00c6ff); color: white;'>";
-echo "<h1 style='font-family: Poppins, sans-serif; font-size: 48px; letter-spacing: 2px;'>Welcome To Our Store</h1>";
-echo "<p style='font-size: 20px; max-width: 600px; margin: 20px auto;'>Supplements & Apparel for Your Fitness Journey</p>";
-echo "<a href='products.php'><button style='background: white; color: #007bff; padding: 15px 25px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer;'>Shop Now</button></a>";
+// Display welcome section with store message and Shop Now button
+echo "<div class='welcome-container'>";
+echo "<h1>Welcome To Our Store</h1>"; // Main title of the welcome section
+echo "<p>Supplements & Apparel for Your Fitness Journey</p>"; // Description under the title
+echo "<a href='products.php'><button class='shop-now-button'>Shop Now</button></a>"; // Button linking to products page
 echo "</div>";
 
-// Logo
-echo "<div style='text-align: center; margin-top: 30px;'>";
-echo "<img src='/products%20images/favicon.png' alt='logo Image' style='max-width: 15%; height: auto;'>";
-echo "<p style='font-size: 20px; max-width: 600px; margin: 20px auto;'>Popular Supplements & Apparel</p>";
+// Display store logo and a heading
+echo "<div class='logo-container'>";
+echo "<img src='/products%20images/favicon.png' alt='logo Image' style='max-width: 15%; height: auto;'>"; // Logo image
+echo "<h2>Popular Supplements & Apparel</h2>"; // Subheading for the product section
 echo "</div>";
 
-// Product Section
-echo "<div style='display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; margin-top: 50px; padding: 20px; max-width: 1200px; margin-left: auto; margin-right: auto;'>";
+// Display product section
+echo "<div class='product-section'>";
+
+// Define the products in an array: image, name, and price
 $products = [
     ["products images/Choco Mint whey.png", "Choco Mint Whey Protein Powder", "20.99"],
     ["products images/ChocolateVegan.png", "Chocolate Flavour Vegan Protein Powder", "18.99"],
@@ -30,7 +34,7 @@ $products = [
     ["products images/strawmass.jpg", "Strawberry Mass Gainer", "23.99"],
     ["products images/preworkout.jpg", "Gold Pre-Workout", "13.99"],
 
-    // Clothing
+    // Clothing items
     ["clothing images/blackhoodiemens.jpg", "Black Hoodie - Mens", "34.99"],
     ["clothing images/whitetshirtmens.jpg", "White T-Shirt - Mens", "3.99"],
     ["clothing images/navyshortsmens.png", "Navy Shorts - Mens", "8.99"],
@@ -39,17 +43,19 @@ $products = [
     ["clothing images/whitejoggers.jpg", "White Joggers - Womans", "20.99"]
 ];
 
+// Loop through each product to display it on the page
 foreach ($products as $product) {
-    echo "<div style='flex: 1 1 300px; text-align: center; background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);'>";
-    echo "<img src='{$product[0]}' alt='{$product[1]}' style='width: 100%; max-width: 250px; height: auto; border-radius: 10px;'>";
-    echo "<h3 style='margin-top: 15px; color: #333;'>{$product[1]}</h3>";
-    echo "<p style='font-weight: bold; color: #007bff;'>\${$product[2]}</p>";
-    echo "<a href='add_to_cart.php?image={$product[0]}&name={$product[1]}&price={$product[2]}'>";
-    echo "<button style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;'>Add to Cart</button>";
+    echo "<div class='product-card'>"; // Start a new product card container
+    echo "<img src='{$product[0]}' alt='{$product[1]}'>"; // Display product image
+    echo "<h3>{$product[1]}</h3>"; // Display product name
+    echo "<p>\${$product[2]}</p>"; // Display product price
+    echo "<a href='add_to_cart.php?image={$product[0]}&name={$product[1]}&price={$product[2]}'>"; // Link to add product to cart
+    echo "<button class='add-to-cart-button'>Add to Cart</button>"; // Add to cart button
     echo "</a>";
-    echo "</div>";
+    echo "</div>"; // End of product card container
 }
-echo "</div>";
+echo "</div>"; // End of product section
 
+// Include the footer of the page
 require 'templates/footer.php';
 ?>

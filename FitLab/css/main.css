@@ -1,40 +1,174 @@
+/* General body styling */
 body {
-  padding-top: 50px;
-  padding-bottom: 20px;
-  background-color: #ebebeb;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #ebebeb;
 }
 
+/* Navbar Branding */
 .navbar-brand {
     font-weight: bold;
     font-size: 30px;
     font-family: Papyrus, 'kristen itc';
 }
 
+/* Custom Navbar styles */
+.navbar-custom {
+    background-color: dodgerblue;
+    border-color: darkblue;
+    border-width: 3px;
+    border-style: solid;
+}
+
+/* Navbar Brand custom color */
+.navbar-brand-custom {
+    color: black !important;
+}
+
+/* Center the navbar content */
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    width: 32%;
+}
+
+/* Add to cart button styling */
+.btn-add-to-cart {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Add to cart button hover effect */
+.btn-add-to-cart:hover {
+    background: #0056b3;
+}
+
+/* General container for welcome section */
+.welcome-container {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    color: white;
+}
+
+/* Welcome text styling */
+.welcome-container h1 {
+    font-family: Poppins, sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
+}
+
+/* Welcome description styling */
+.welcome-container p {
+    font-size: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+/* Shop Now Button styling */
+.shop-now-button {
+    background: white;
+    color: #007bff;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Logo container styling */
+.logo-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Product section layout */
+.product-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 50px;
+    padding: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Product card image styling */
+.product-card img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Product title styling */
+.product-card h3 {
+    margin-top: 15px;
+    color: #333;
+}
+
+/* Product price styling */
+.product-card p {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Add to Cart button in product card */
+.add-to-cart-button {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Navbar link and dropdown styling */
+.navbar-right a,
+.navbar-right .dropdown-toggle {
+    color: white !important;
+}
+
+/* Navbar item styling */
 .navbar-nav > li > a {
     color: white !important;
     font-weight: bold;
     transition: color 0.5s ease-in-out;
 }
 
+/* Navbar item hover effect */
 .navbar-nav > li > a:hover {
     color: midnightblue !important;
     text-decoration: underline;
 }
 
+/* Label styling */
 label {
     display: block;
     margin: 5px 0;
 }
 
+/* Button transition effects */
 button {
     transition: background 0.3s, transform 0.2s;
 }
 
+/* Button hover effect */
 button:hover {
     background: #0056b3;
     transform: scale(1.05);
 }
 
+/* Clothing container grid setup */
 .clothing-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -44,17 +178,60 @@ button:hover {
     margin: auto;
 }
 
-labels {
-    display: block;
-    margin: 5px 0;
-}
-
+/* Table styling */
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 td,
 th {
     padding: 5px;
     border-bottom: 1px solid #aaa;
+}
+
+/* Product page header styling */
+.product-page-header {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Poppins, sans-serif;
+}
+
+.product-page-header h1 {
+    color: dodgerblue;
+    font-size: 48px;
+}
+
+/* Product grid layout */
+.product-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+/* Product card styling */
+.product-card {
+    flex: 1 1 300px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Product image styling */
+.product-image {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+}
+
+/* Product price styling */
+.product-price {
+    color: #007bff;
+    font-weight: bold;
 }

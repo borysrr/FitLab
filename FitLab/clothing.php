@@ -1,30 +1,52 @@
 <?php
-
+// Include helper functions (if any are defined in functions.php)
 require 'lib/functions.php';
+
+// Include the common header template (e.g. navigation bar, site layout)
 require 'templates/header.php';
+
+// Connect to the database
 require_once 'src/db_connect.php';
-
-echo "<div style='text-align: center; margin-top: 50px;'>";
-echo "<h1 style='font-family: Poppins, sans-serif; color: dodgerblue; font-size: 48px;'>Products</h1>";
-echo "<p>Explore our range of amazing products.</p>";
-echo "<div style='display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-top: 50px; padding: 20px; max-width: 1200px; margin: auto;'>";
-
-$stmt = $connection->prepare("SELECT * FROM Products WHERE category = 'clothing'");
-$stmt->execute();
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($products as $product) {
-    echo "<div style='flex: 1 1 300px; background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center;'>";
-    echo "<img src='{$product['image']}' alt='{$product['name']}' style='width: 100%; max-width: 250px; border-radius: 10px;'>";
-    echo "<h3>{$product['name']}</h3>";
-    echo "<p style='color: #007bff; font-weight: bold;'>£{$product['price']}</p>";
-    echo "<p>Stock: {$product['stock_quantity']}</p>";
-    echo "<a href='add_to_cart.php?image={$product['image']}&name={$product['name']}&price={$product['price']}'>";
-    echo "<button style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px;'>Add to Cart</button>";
-    echo "</a>";
-    echo "</div>";
-}
-
-echo "</div>";
-require 'templates/footer.php';
 ?>
+
+<!-- Section title and short description -->
+<div class="product-page-header">
+    <h1>Products</h1>
+    <p>Explore our range of amazing products.</p>
+</div>
+
+<!-- Container that holds all product cards in a grid layout -->
+<div class="product-grid">
+    <?php
+    // Prepare SQL query to select only products from the 'clothing' category
+    $stmt = $connection->prepare("SELECT * FROM Products WHERE category = 'clothing'");
+    $stmt->execute();
+
+    // Fetch all matching products as an associative array
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Loop through each product and display it
+    foreach ($products as $product): ?>
+        <div class="product-card">
+            <!-- Display product image -->
+            <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" class="product-image">
+
+            <!-- Display product name -->
+            <h3><?= $product['name'] ?></h3>
+
+            <!-- Display product price -->
+            <p class="product-price">$<?= $product['price'] ?></p>
+
+            <!-- Display stock quantity -->
+            <p>Stock: <?= $product['stock_quantity'] ?></p>
+
+            <!-- Add to cart button with product data passed via GET parameters -->
+            <a href="add_to_cart.php?image=<?= $product['image'] ?>&name=<?= $product['name'] ?>&price=<?= $product['price'] ?>">
+                <button class="btn-add-to-cart">Add to Cart</button>
+            </a>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<!-- Include the common footer -->
+<?php require 'templates/footer.php'; ?>
