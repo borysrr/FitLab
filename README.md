@@ -15,7 +15,7 @@ all work was completed by us and this is how we split up the work for the projec
 
 Tom: Worked with the database and the functionality to be incorporated into the website, the SQL linking, and the phpMyAdmin connection (CRUD).
 
-Borys: Layout and website design, how the majority of the website looks. structure design. products, clothing, checkout.
+Borys: Layout and website design, how the majority of the website looks. structure, design and appearance, outputting and formatting.
 
 Rhema: Worked on lots of the SQL and how it will work with the website, Diagram, and the Use Case Spec/ Diagram. Log in and sign up validation, etc.
 
